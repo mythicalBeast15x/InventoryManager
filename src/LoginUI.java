@@ -73,9 +73,11 @@ public class LoginUI extends JFrame implements ActionListener {
         UserInfo user1 = new UserInfo("admin", "password");
         UserInfo user2 = new UserInfo("coolcat", "password");
         UserInfo user3 = new UserInfo("Sharkboy", "password");
+        UserInfo user4 = new UserInfo("", "");
         users.add(user1);
         users.add(user2);
         users.add(user3);
+        users.add(user4);
 
         //testing if username and password match
         for (int i = 0; i < users.size(); i++){
