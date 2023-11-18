@@ -7,8 +7,9 @@ import java.awt.*;
 
 public class GUI {
     private JFrame frame;
-    private JList<String> itemList;
-    private JTextArea itemInfoArea;
+    private JList<String> shopList;
+    private JList<String> cartList;
+    private JButton selectButton;
 
     public GUI() {
         frame = new JFrame("Item Selection");
@@ -30,51 +31,83 @@ public class GUI {
 
         frame.add(titlePanel, BorderLayout.NORTH);
 
-        // Sample item list
-        String[] items = {"Heer's Salt and Vinegar Potato Chips", "Lay's Classic Potato Chips", "Fritos The Original Corn Chips", "Doritos Nacho Cheese", "More Chips", "Even More Chips", "Soda"};
+        // Sample item list for Shop
+        String[] shopItems = {"Heer's Salt and Vinegar Potato Chips", "Lay's Classic Potato Chips", "Fritos The Original Corn Chips", "Doritos Nacho Cheese", "More Chips", "Even More Chips", "Soda"};
+        shopList = new JList<>(shopItems);
+        shopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        shopList.setSelectedIndex(0);
+        shopList.setVisibleRowCount(4);
+        shopList.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-        // Creating the JList
-        itemList = new JList<>(items);
-        itemList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        itemList.setSelectedIndex(0);
-        itemList.setVisibleRowCount(4);
+        // ScrollPane for shopList
+        JScrollPane shopListScroller = new JScrollPane(shopList);
 
-        // Adding a border to the JList
-        itemList.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        // Cart list (initially empty)
+        cartList = new JList<>(new DefaultListModel<>());
+        cartList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cartList.setSelectedIndex(0);
+        cartList.setVisibleRowCount(4);
+        cartList.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-        // Adding the JList to a JScrollPane
-        JScrollPane listScroller = new JScrollPane(itemList);
-        listScroller.setPreferredSize(new Dimension(250, 100));
-
-        // Item info area
-        itemInfoArea = new JTextArea(5, 20);
-        itemInfoArea.setEditable(false);
-        JScrollPane infoScroller = new JScrollPane(itemInfoArea);
+        // ScrollPane for cartList
+        JScrollPane cartListScroller = new JScrollPane(cartList);
 
         // Main content panel with GridBagLayout
         JPanel contentPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        // Adding list scroller to the content panel
-        gbc.gridx = 0; // First column
-        gbc.gridy = 0; // First row
-        gbc.insets = new Insets(10, 10, 10, 10);
-        contentPanel.add(listScroller, gbc);
+        // Label for Shop
+        JLabel shopLabel = new JLabel("Shop");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        contentPanel.add(shopLabel, gbc);
 
-        // Adding item info area to the content panel
-        gbc.gridx = 1; // Second column
-        gbc.gridy = 0; // First row (same as list scroller)
-        contentPanel.add(infoScroller, gbc);
+        // Adding shop list scroller to content panel
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        contentPanel.add(shopListScroller, gbc);
+
+        // Select button under Shop list
+        selectButton = new JButton("Select");
+        selectButton.addActionListener(e -> {
+            String selectedItem = shopList.getSelectedValue();
+            if (selectedItem != null) {
+                DefaultListModel<String> cartModel = (DefaultListModel<String>) cartList.getModel();
+                cartModel.addElement(selectedItem);
+            }
+        });
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        contentPanel.add(selectButton, gbc);
+
+        // Label for Cart
+        JLabel cartLabel = new JLabel("Cart");
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        contentPanel.add(cartLabel, gbc);
+
+        // Adding cart list scroller to content panel
+        gbc.gridy = 0;
+        gbc.gridheight = 4; // Make cart list span two rows
+        contentPanel.add(cartListScroller, gbc);
 
         frame.add(contentPanel, BorderLayout.CENTER);
 
         // Buttons
         JButton logoutButton = new JButton("Logout");
-        JButton updateInfoButton = new JButton("Update-Info");
 
+        JButton updateInfoButton = new JButton("Check-out");
         updateInfoButton.addActionListener(e -> {
-            Modify modifyWindow = new Modify();
-            modifyWindow.show();
+            Modify checkoutWindow = new Modify();
+
+            ListModel<String> model = cartList.getModel();
+            String[] items = new String[model.getSize()];
+            for (int i = 0; i < model.getSize(); i++) {
+                items[i] = model.getElementAt(i);
+            }
+
+            checkoutWindow.setListData(items);
+            checkoutWindow.show();
         });
 
         // Panel for buttons
@@ -88,5 +121,12 @@ public class GUI {
     }
     public void show() {
         frame.setVisible(true);
+    }
+    // Main method
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            GUI gui = new GUI();
+            gui.show();
+        });
     }
 }
