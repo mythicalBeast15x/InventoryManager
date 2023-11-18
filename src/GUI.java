@@ -10,6 +10,7 @@ public class GUI {
     private JList<String> shopList;
     private JList<String> cartList;
     private JButton selectButton;
+    private JButton removeFromCartButton;
 
     public GUI() {
         frame = new JFrame("Item Selection");
@@ -80,6 +81,19 @@ public class GUI {
         gbc.gridy = 2;
         contentPanel.add(selectButton, gbc);
 
+        // Remove from cart button under cart list
+        removeFromCartButton = new JButton("Remove From Cart");
+        removeFromCartButton.addActionListener(e -> {
+            String selectedItem = cartList.getSelectedValue();
+            if (selectedItem != null) {
+                DefaultListModel<String> cartModel = (DefaultListModel<String>) cartList.getModel();
+                cartModel.removeElement(selectedItem);
+            }
+        });
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        contentPanel.add(removeFromCartButton, gbc);
+
         // Label for Cart
         JLabel cartLabel = new JLabel("Cart");
         gbc.gridx = 1;
@@ -95,19 +109,30 @@ public class GUI {
 
         // Buttons
         JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+            LoginUI newUI2 = new LoginUI();
+            frame.dispose();
+        });
 
         JButton updateInfoButton = new JButton("Check-out");
         updateInfoButton.addActionListener(e -> {
-            Modify checkoutWindow = new Modify();
+            DefaultListModel<String> cartModel = (DefaultListModel<String>) cartList.getModel();
 
-            ListModel<String> model = cartList.getModel();
-            String[] items = new String[model.getSize()];
-            for (int i = 0; i < model.getSize(); i++) {
-                items[i] = model.getElementAt(i);
+            if(cartModel.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Your cart is empty!");
             }
+            else{
+                Modify checkoutWindow = new Modify();
 
-            checkoutWindow.setListData(items);
-            checkoutWindow.show();
+                ListModel<String> model = cartList.getModel();
+                String[] items = new String[model.getSize()];
+                for (int i = 0; i < model.getSize(); i++) {
+                    items[i] = model.getElementAt(i);
+                }
+
+                checkoutWindow.setListData(items);
+                checkoutWindow.show();
+            }
         });
 
         // Panel for buttons
