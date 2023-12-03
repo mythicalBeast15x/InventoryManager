@@ -15,6 +15,8 @@ public class LoginUI extends JFrame implements ActionListener {
     JTextField username;
     JButton btn;
 
+    private JButton registerButton;
+
     public LoginUI(){
         setTitle("Login UI Test");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -47,6 +49,11 @@ public class LoginUI extends JFrame implements ActionListener {
         message.setForeground(Color.RED);
         message.setVisible(false);
 
+        registerButton = new JButton("Register");
+        registerButton.setBounds(400, 350, 100, 40);
+        registerButton.addActionListener(this);
+
+
 
         this.add(label_username);
         this.add(username);
@@ -55,6 +62,8 @@ public class LoginUI extends JFrame implements ActionListener {
         this.add(btn);
         this.add(message);
         this.add(headTitle);
+        this.add(registerButton);
+
 
 
 
@@ -63,38 +72,47 @@ public class LoginUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Boolean correctInfo = false;
-        //retrieving user input
-        String userInput = username.getText();
-        String passInput = String.valueOf(password.getPassword());
 
-        //creating test info
-        ArrayList<UserInfo> users = new ArrayList<UserInfo>();
-        UserInfo user1 = new UserInfo("admin", "password");
-        UserInfo user2 = new UserInfo("coolcat", "password");
-        UserInfo user3 = new UserInfo("Sharkboy", "password");
-        UserInfo user4 = new UserInfo("", "");
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
+        if (e.getSource() == btn) {
+            Boolean correctInfo = false;
+            //retrieving user input
+            String userInput = username.getText();
+            String passInput = String.valueOf(password.getPassword());
 
-        //testing if username and password match
-        for (int i = 0; i < users.size(); i++){
-            if (userInput.equals(users.get(i).getUsername())){ //need a break somewhere here so it doesnt have to iterate through whole list but rlly not that important with filler data
-                if (passInput.equals(users.get(i).getPassword())){
-                    correctInfo = true;
-                    GUI myGui = new GUI();
-                    myGui.show();
-                    dispose();
+            //creating test info
+            ArrayList<UserInfo> users = new ArrayList<UserInfo>();
+            UserInfo user1 = new UserInfo("admin", "password");
+            UserInfo user2 = new UserInfo("coolcat", "password");
+            UserInfo user3 = new UserInfo("Sharkboy", "password");
+            UserInfo user4 = new UserInfo("", "");
+            users.add(user1);
+            users.add(user2);
+            users.add(user3);
+            users.add(user4);
+
+            //testing if username and password match
+            for (int i = 0; i < users.size(); i++){
+                if (userInput.equals(users.get(i).getUsername())){ //need a break somewhere here so it doesnt have to iterate through whole list but rlly not that important with filler data
+                    if (passInput.equals(users.get(i).getPassword())){
+                        correctInfo = true;
+                        GUI myGui = new GUI();
+                        myGui.show();
+                        dispose();
+                    }
                 }
             }
+            if (!correctInfo){
+                message.setVisible(true);
+                username.setText("");
+                password.setText("");
+            }
+
+        } else if (e.getSource() == registerButton) {
+            EmployeeRegistrationGUI employeeRegistrationGUI = new EmployeeRegistrationGUI();
+            employeeRegistrationGUI.setVisible(true);
         }
-        if (!correctInfo){
-            message.setVisible(true);
-            username.setText("");
-            password.setText("");
-        }
+
+
 
     }
 }
