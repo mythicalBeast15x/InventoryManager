@@ -1,5 +1,3 @@
-package src;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.*;
@@ -73,8 +71,7 @@ public class GUI {
         selectButton.addActionListener(e -> {
             String selectedItem = shopList.getSelectedValue();
             if (selectedItem != null) {
-                DefaultListModel<String> cartModel = (DefaultListModel<String>) cartList.getModel();
-                cartModel.addElement(selectedItem);
+                addItemToCart(selectedItem);
             }
         });
         gbc.gridx = 0;
@@ -86,8 +83,7 @@ public class GUI {
         removeFromCartButton.addActionListener(e -> {
             String selectedItem = cartList.getSelectedValue();
             if (selectedItem != null) {
-                DefaultListModel<String> cartModel = (DefaultListModel<String>) cartList.getModel();
-                cartModel.removeElement(selectedItem);
+                removeItemFromCart(selectedItem);
             }
         });
         gbc.gridx = 1;
@@ -153,5 +149,21 @@ public class GUI {
             GUI gui = new GUI();
             gui.show();
         });
+    }
+    public void addItemToCart(String selectedItem){
+        DefaultListModel<String> cartModel = (DefaultListModel<String>) getCartList().getModel();
+        cartModel.addElement(selectedItem);
+    }
+    public void removeItemFromCart(String selectedItem){
+        DefaultListModel<String> cartModel = (DefaultListModel<String>) getCartList().getModel();
+        cartModel.removeElement(selectedItem);
+    }
+
+    public JList<String> getCartList() {
+        return cartList;
+    }
+
+    public void setCartList(JList<String> cartList) {
+        this.cartList = cartList;
     }
 }

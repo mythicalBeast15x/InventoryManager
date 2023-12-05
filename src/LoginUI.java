@@ -1,5 +1,3 @@
-package src;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -63,10 +61,23 @@ public class LoginUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Boolean correctInfo = attemptLogin(username.getText(), String.valueOf(password.getPassword()));
+
+        if (correctInfo){
+            GUI myGui = new GUI();
+            myGui.show();
+            dispose();
+        }
+        if (!correctInfo){
+            message.setVisible(true);
+            username.setText("");
+            password.setText("");
+        }
+
+    }
+
+    public Boolean attemptLogin(String username, String password){
         Boolean correctInfo = false;
-        //retrieving user input
-        String userInput = username.getText();
-        String passInput = String.valueOf(password.getPassword());
 
         //creating test info
         ArrayList<UserInfo> users = new ArrayList<UserInfo>();
@@ -81,21 +92,14 @@ public class LoginUI extends JFrame implements ActionListener {
 
         //testing if username and password match
         for (int i = 0; i < users.size(); i++){
-            if (userInput.equals(users.get(i).getUsername())){ //need a break somewhere here so it doesnt have to iterate through whole list but rlly not that important with filler data
-                if (passInput.equals(users.get(i).getPassword())){
+            if (username.equals(users.get(i).getUsername())){
+                if (password.equals(users.get(i).getPassword())){
                     correctInfo = true;
-                    GUI myGui = new GUI();
-                    myGui.show();
-                    dispose();
+                    break;
                 }
             }
         }
-        if (!correctInfo){
-            message.setVisible(true);
-            username.setText("");
-            password.setText("");
-        }
-
+        return correctInfo;
     }
 }
 
