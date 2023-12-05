@@ -4,32 +4,15 @@
 - Dominic Richard Cianfrani
 - Andrew Scott Evert
 ## Completed Tasks
-- Added a checkout cart to Main page
-- Added a checkout button to Main page to checkout items
-- Added an add to cart functionality for items
-- Added a remove to cart functionality
-- Created a checkout page
-- Added logic between checkout and main page to allow data transfer
-- Added functionality to login buttons
-- Added logic to checkout button
-- Edited values in database
-- Created Lambdas Function to access database and return data
-- Created basic API
-- Created an encrypt function for passwords so passwords aren't stored in database as plaintext
+- Fixed cart functionality
+- Created test for Login
+- Created test for GUI
+- Created Database inside project
+- Created psudo API with H2 Database
+- Used Mavern to build project
+- Created a CI for testing and building with github actions 
 ## Complications
-- The Lambdas Function has some bugs. It needs fixing
+- AWS started charging alot of money for the server
+- We had to scrap the cloud database and switch to an embedded database (H2)
 ## Tasks for Next Week
-- Debug Lambdas Function
-- Get API working. Things needed:
-  * get name, cost, item_num, and description from database
-  * modify data
-  * create new items
-  * encrypt password data from api call
-  * decrypt data when sending it back
-- Create classes that implement abstraction and MVC that connect with the API
-ie:
-  * Item Class
-  * ValidateUsername - Checks credentials on login
-  * APIHelper - Gives access to the database to the classes that need it
-  * UpdateInventory - Updates the database when checking out items
-- "Reset" Screen when checkout is cancelled or completed
+- Minor Fixes
