@@ -1,7 +1,10 @@
+package src.Tests;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import src.LoginUI;
 class LoginUITest {
 
     @Test

@@ -1,9 +1,12 @@
+package src.Tests;
+
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import src.GUI;
 class GUITest {
     @Test
     void addingItemToCartShouldIncreaseCartSize(){

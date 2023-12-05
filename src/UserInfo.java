@@ -1,4 +1,4 @@
-
+package src;
 public class UserInfo {
     private String username;
     private String password;

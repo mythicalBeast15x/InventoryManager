@@ -1,0 +1,9 @@
+2023-12-04 22:02:13.593016-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "LOT" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS Item(item_id varchar(50), item_name varchar(50), item_desc text(100), item_cost numeric(9,2), lot_num varchar(5), primary key(item_id), foreign key(lot_num) references Lot(lot_num)) [42102-224]
+2023-12-04 22:10:22.341271-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "LOT" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS Item(item_id varchar(50), item_name varchar(50), item_desc text(100), item_cost numeric(9,2), lot_num varchar(5), primary key(item_id), foreign key(lot_num) references Lot(lot_num)) [42102-224]
+2023-12-04 22:27:10.516177-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO Item VALUES ('I001', 'Heer's Salt and Vinegar Potato Chips', 'The Originals, sure to bring a nostalgic taste to your mouth', 3.99, 'L001[*]');"; SQL statement:
+INSERT INTO Item VALUES ('I001', 'Heer's Salt and Vinegar Potato Chips', 'The Originals, sure to bring a nostalgic taste to your mouth', 3.99, 'L001'); [42000-224]
