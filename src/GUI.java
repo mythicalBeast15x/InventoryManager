@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GUI {
     private JFrame frame;
@@ -32,7 +33,8 @@ public class GUI {
         frame.add(titlePanel, BorderLayout.NORTH);
 
         // Sample item list for Shop
-        String[] shopItems = {"Heer's Salt and Vinegar Potato Chips", "Lay's Classic Potato Chips", "Fritos The Original Corn Chips", "Doritos Nacho Cheese", "More Chips", "Even More Chips", "Soda"};
+        //String[] shopItems = {"Heer's Salt and Vinegar Potato Chips", "Lay's Classic Potato Chips", "Fritos The Original Corn Chips", "Doritos Nacho Cheese", "More Chips", "Even More Chips", "Soda"};
+        String[] shopItems = Helper.getInventoryList().toArray(new String[0]);
         shopList = new JList<>(shopItems);
         shopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         shopList.setSelectedIndex(0);
