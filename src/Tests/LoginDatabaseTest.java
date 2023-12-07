@@ -12,5 +12,6 @@ public class LoginDatabaseTest {
     public void incorrectPassword(){assertFalse(Helper.attemptLogin("123456989", "NotARealPassword"));}
     @Test
     public void correctUsernameAndPassword(){
-        assertTrue(Helper.attemptLogin("123456989", "adminpassword"));}
+        assertTrue(Helper.attemptLogin("123456989", "adminpassword"));
+    }
 }
