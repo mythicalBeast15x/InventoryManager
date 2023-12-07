@@ -50,7 +50,9 @@ public class CreateDatabase{
             // Insert data into Item table
             //statement.execute("INSERT INTO Item VALUES ('I001', 'Heer''s Salt and Vinegar Potato Chips', 'The Originals, sure to bring a nostalgic taste to your mouth', 3.99, 'L001');");
             //statement.execute("INSERT INTO Item VALUES ('I002', 'Pepsi Soda', 'The classic refreshing drink', 2.99, 'L002');");
-
+            //String alterTableSql = "ALTER TABLE Item ADD COLUMN count INT" ;
+            //String alterTableSql = "Update Item set count = 100" ;
+            //statement.executeUpdate(alterTableSql);
             // Close the resources
             statement.close();
             connection.close();

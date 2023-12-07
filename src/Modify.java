@@ -2,10 +2,16 @@
 package src;
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Modify {
     private JFrame frame;
     private JList<String> checkoutList;
+
+    private String[] checkoutItems;
 
     public Modify() {
         frame = new JFrame("Checkout Window");
@@ -34,6 +40,11 @@ public class Modify {
         // Purchase button
         JButton purchaseButton = new JButton("Complete Purchase");
         purchaseButton.addActionListener(e -> {
+            try {
+                Helper.updateItems(checkoutItems);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             JOptionPane.showMessageDialog(frame, "Thank you for your Purchase!");
             frame.dispose(); // Closes the Modify window
         });
@@ -53,5 +64,9 @@ public class Modify {
     // Method to update the list items
     public void setListData(String[] items) {
         checkoutList.setListData(items);
+        checkoutItems = items;
     }
+
+
+
 }

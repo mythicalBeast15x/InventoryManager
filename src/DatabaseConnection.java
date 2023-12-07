@@ -30,6 +30,7 @@ public class DatabaseConnection {
                     String desc = resultSet.getString("item_desc");
                     double cost = resultSet.getDouble("item_cost");
                     String lotNum = resultSet.getString("lot_num");
+                    //String count = resultSet.getString("count");
                     Item item = new Item(name, id, desc, cost, lotNum);
                     items.add(item);
                 }

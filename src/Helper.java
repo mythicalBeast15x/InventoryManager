@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Helper {
 
@@ -51,7 +53,25 @@ public class Helper {
             }
         }
         return null;
+    }
 
+    public static Map<String, Integer> countUniqueItems(String[] items){
+        Map<String, Integer> uniqueItems = new HashMap<>();
+        for(String item: items){
+            if(!uniqueItems.containsKey(item)){
+                uniqueItems.put(item,1);
+            }else{
+                uniqueItems.put(item,uniqueItems.get(item)+1);
+            }
+        }
+        return uniqueItems;
+    }
+    public static void updateItems(String[] items) throws SQLException{
+        DatabaseConnection db = new DatabaseConnection();
+        Map<String, Integer> uniqueItems = countUniqueItems(items);
+        for(Map.Entry<String, Integer> entry: uniqueItems.entrySet()){
+            db.updateItems(entry.getKey(), entry.getValue());
+        }
     }
 }
 
