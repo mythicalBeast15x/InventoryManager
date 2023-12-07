@@ -1,4 +1,4 @@
-package src;
+package Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +14,9 @@ public class LoginUI extends JFrame implements ActionListener {
     JTextField username;
     JButton btn;
 
+
     public LoginUI(){
-        setTitle("Login UI Test");
+        setTitle("Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);

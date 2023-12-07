@@ -1,4 +1,4 @@
-package src;
+package Main;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.*;
@@ -11,6 +11,8 @@ public class GUI {
     private JList<String> cartList;
     private JButton selectButton;
     private JButton removeFromCartButton;
+    private JButton inventoryButton;
+
 
     public GUI() {
         frame = new JFrame("Item Selection");
@@ -106,10 +108,16 @@ public class GUI {
 
         frame.add(contentPanel, BorderLayout.CENTER);
 
-        // Buttons
+        // Buttons on buttonpanel
         JButton logoutButton = new JButton("Logout");
         logoutButton.addActionListener(e -> {
             LoginUI newUI2 = new LoginUI();
+            frame.dispose();
+        });
+
+        JButton inventoryButton = new JButton("Inventory");
+        inventoryButton.addActionListener(e -> {
+            InventoryUI newInventoryUI = new InventoryUI();
             frame.dispose();
         });
 
@@ -137,10 +145,12 @@ public class GUI {
         // Panel for buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(logoutButton);
+        buttonPanel.add(inventoryButton);
         buttonPanel.add(updateInfoButton);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
         frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void show() {

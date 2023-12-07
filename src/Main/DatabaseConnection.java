@@ -1,4 +1,4 @@
-package src;
+package Main;
 import org.h2.command.query.Select;
 
 import java.sql.Connection;
