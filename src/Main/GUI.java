@@ -1,9 +1,10 @@
-package Main;
+package src.main;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import src.main.Helper;
 
 public class GUI {
     private JFrame frame;
@@ -111,6 +112,7 @@ public class GUI {
         // Buttons on buttonpanel
         JButton logoutButton = new JButton("Logout");
         logoutButton.addActionListener(e -> {
+            Helper.resetAccess();
             LoginUI newUI2 = new LoginUI();
             frame.dispose();
         });
@@ -145,7 +147,9 @@ public class GUI {
         // Panel for buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(logoutButton);
-        buttonPanel.add(inventoryButton);
+        if(Helper.getAccess() == Access.ADMIN){
+            buttonPanel.add(inventoryButton);
+        }
         buttonPanel.add(updateInfoButton);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 

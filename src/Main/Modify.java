@@ -1,5 +1,5 @@
 
-package Main;
+package src.main;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;

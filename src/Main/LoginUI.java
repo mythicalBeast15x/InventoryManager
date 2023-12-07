@@ -1,9 +1,10 @@
-package Main;
+package src.main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import src.main.GUI;
 
 public class LoginUI extends JFrame implements ActionListener {
     JPasswordField password;
@@ -63,14 +64,11 @@ public class LoginUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Boolean correctInfo = attemptLogin(username.getText(), String.valueOf(password.getPassword()));
-
-        if (correctInfo){
+        if (Helper.attemptLogin(username.getText(), String.valueOf(password.getPassword()))){
             GUI myGui = new GUI();
             myGui.show();
             dispose();
-        }
-        if (!correctInfo){
+        }else{
             message.setVisible(true);
             username.setText("");
             password.setText("");
@@ -78,8 +76,8 @@ public class LoginUI extends JFrame implements ActionListener {
 
     }
 
-    public Boolean attemptLogin(String username, String password){
-        Boolean correctInfo = false;
+    public boolean attemptLogin(String username, String password){
+        boolean correctInfo = false;
 
         //creating test info
         ArrayList<UserInfo> users = new ArrayList<UserInfo>();

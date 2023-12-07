@@ -1,4 +1,4 @@
-package Main;
+package src.main;
 import org.h2.command.query.Select;
 
 import java.sql.Connection;
@@ -45,8 +45,11 @@ public class DatabaseConnection {
         try(PreparedStatement preparedStatement = this.connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, id);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
-                String password = resultSet.getString("password");
-                passwordCorrect = (password.equals(passwordAttempt));
+                if(resultSet.next()){
+                    String password = resultSet.getString("password");
+                    passwordCorrect = (password.equals(passwordAttempt));
+                }
+
             }
         }
         return passwordCorrect;
@@ -60,6 +63,19 @@ public class DatabaseConnection {
             preparedStatement.executeUpdate();
 
         }
+    }
+    public String getAccessLevel(int employee_id) throws SQLException{
+        String access = null;
+        String sqlQuery = "Select access_level from Employee where employee_id = ? ;";
+        try(PreparedStatement preparedStatement = this.connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, employee_id);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    access = resultSet.getString("access_level");
+                }
+            }
+        }
+        return access;
     }
 
 

@@ -1,4 +1,4 @@
-package Main;
+package src.main;
 
 public class Item {
     private final String name;
